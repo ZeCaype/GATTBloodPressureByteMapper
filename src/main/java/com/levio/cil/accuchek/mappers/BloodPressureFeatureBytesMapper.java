@@ -1,5 +1,6 @@
-package com.levio.cil.accuchek.dto;
+package com.levio.cil.accuchek.mappers;
 
+import com.levio.cil.accuchek.dto.BloodPressureFeatureDto;
 import com.levio.cil.accuchek.rest.utils.ByteUtils;
 import org.springframework.stereotype.Component;
 
