@@ -30,7 +30,7 @@ public class BloodPressureMetricsController {
   }
   
   @PostMapping (value = "/measurement")
-  public BloodPressureMeasurementDto mapBloodPressureMeasurement(@RequestBody int[] dataDto) {
+  public BloodPressureMeasurementDto mapBloodPressureMeasurement(@RequestBody byte[] dataDto) {
     return bloodPressureMeasurementBytesMapper.mapArrayOfBytesToReadableData(dataDto);
   }
 }
