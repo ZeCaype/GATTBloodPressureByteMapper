@@ -20,21 +20,106 @@ public class BloodPressureMeasurementBytesMapper {
     setFlagsFromRawData(dataDto, flags, position);
     bloodPressureMeasurement.setFlags(flags);
     position = setCompundValuesFromRawData(dataDto, bloodPressureMeasurement, flags, position);
-    position = setYearFromRawData(dataDto, bloodPressureMeasurement, position);
-    
+
+    if (flags.isTimeStampFlagPresent()) {
+      position = setYearFromRawData(dataDto, bloodPressureMeasurement, position);
+      position = setMonthFromRawData(dataDto, bloodPressureMeasurement, position);
+      position = setDayFromRawData(dataDto, bloodPressureMeasurement, position);
+      position = setHoursFromRawData(dataDto, bloodPressureMeasurement, position);
+      position = setMinutesFromRawData(dataDto, bloodPressureMeasurement, position);
+      position = setSecondsFromRawData(dataDto, bloodPressureMeasurement, position);
+    }
+
+    if (flags.isPulseRateFlagPresent()) {
+      position = setPulseRate(dataDto, bloodPressureMeasurement, position);
+    }
+
+    if (flags.isUserIdFlagPresent()) {
+      position = setUserIdFromRawData(dataDto, bloodPressureMeasurement, position);
+    }
 
     return bloodPressureMeasurement;
   }
 
-  private int setYearFromRawData(byte[] bytes, BloodPressureMeasurementDto bloodPressure, int position) {
-    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(bytes, position + 1) + ByteUtils.byteToBinaryString(bytes, position);
+  private int setUserIdFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int userId = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setUserId(userId);
+    position++;
+
+    return position;
+  }
+
+  private int setPulseRate(byte[] dataDto, BloodPressureMeasurementDto bloodPressureMeasurement,
+      int position) {
+    bloodPressureMeasurement
+        .setPulseRate(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
+    position = position + 2;
+    return position;
+  }
+
+  private int setSecondsFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int seconds = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setSecond(seconds);
+    position++;
+
+    return position;
+  }
+
+  private int setMinutesFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int minutes = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setMinute(minutes);
+    position++;
+
+    return position;
+  }
+
+  private int setHoursFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int hours = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setHour(hours);
+    position++;
+
+    return position;
+  }
+
+  private int setDayFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int day = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setDay(day);
+    position++;
+
+    return position;
+  }
+
+  private int setMonthFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
+    int month = Integer.parseInt(rawSequenceNumberBits, 2);
+    bloodPressureMeasurement.setMonth(month);
+    position++;
+
+    return position;
+  }
+
+  private int setYearFromRawData(byte[] bytes, BloodPressureMeasurementDto bloodPressure,
+      int position) {
+    String rawSequenceNumberBits = ByteUtils.byteToBinaryString(bytes, position + 1)
+        + ByteUtils.byteToBinaryString(bytes, position);
     int year = Integer.parseInt(rawSequenceNumberBits, 2);
     bloodPressure.setYear(year);
     position = position + 2;
-    
+
     return position;
   }
-  
+
   private int setCompundValuesFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, BloodPressureMeasurementFlagsDto flags,
       int position) {

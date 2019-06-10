@@ -25,7 +25,7 @@ public class BloodPressureMetricsController {
   }
 
   @PostMapping (value = "/feature")
-  public BloodPressureFeatureDto mapBloodPressureFeature(@RequestBody int[] dataDto) {
+  public BloodPressureFeatureDto mapBloodPressureFeature(@RequestBody byte[] dataDto) {
     return bloodPressureFeatureBytesMapper.mapArrayOfBytesToReadableData(dataDto);
   }
   

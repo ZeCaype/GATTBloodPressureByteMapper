@@ -12,12 +12,12 @@ public class BloodPressureFeatureBytesMapper {
 
   }
 
-  public BloodPressureFeatureDto mapArrayOfBytesToReadableData(int[] dataDto) {
+  public BloodPressureFeatureDto mapArrayOfBytesToReadableData(byte[] dataDto) {
 
     BloodPressureFeatureDto bloodFeature = new BloodPressureFeatureDto();
 
-    String rawBloodPressureFeatureByte1 = ByteUtils.intToBinaryString(dataDto, 0);
-    String rawBloodPressureFeatureByte2 = ByteUtils.intToBinaryString(dataDto, 1);
+    String rawBloodPressureFeatureByte1 = ByteUtils.byteToBinaryString(dataDto, 0);
+    String rawBloodPressureFeatureByte2 = ByteUtils.byteToBinaryString(dataDto, 1);
     rawBloodPressureFeatureByte1 = new StringBuilder(rawBloodPressureFeatureByte1).reverse().toString();
     rawBloodPressureFeatureByte2 = new StringBuilder(rawBloodPressureFeatureByte2).reverse().toString();
     int bitCount = 0;
