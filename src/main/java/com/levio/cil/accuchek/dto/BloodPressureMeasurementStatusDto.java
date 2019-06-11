@@ -1,15 +1,15 @@
-package com.levio.cil.accuchek.rest.controllers;
+package com.levio.cil.accuchek.dto;
 
-public class MeasurementStatusDto {
+public class BloodPressureMeasurementStatusDto {
 
   private boolean hasBodyMovement;
-  private boolean isCuffTooLoose;
+  private boolean isCuffToLoose;
   private boolean irregularPulseDetected;
-  private String pulseRateDetection;
+  private String pulseRateRangeDetectionFlag;
   private boolean hasImproperMeasurementPosition;
-  
-  public MeasurementStatusDto() {
-    
+
+  public BloodPressureMeasurementStatusDto() {
+
   }
 
   public boolean isHasBodyMovement() {
@@ -20,12 +20,12 @@ public class MeasurementStatusDto {
     this.hasBodyMovement = hasBodyMovement;
   }
 
-  public boolean isCuffTooLoose() {
-    return isCuffTooLoose;
+  public boolean isCuffToLoose() {
+    return isCuffToLoose;
   }
 
-  public void setCuffTooLoose(boolean isCuffTooLoose) {
-    this.isCuffTooLoose = isCuffTooLoose;
+  public void setCuffToLoose(boolean isCuffToLoose) {
+    this.isCuffToLoose = isCuffToLoose;
   }
 
   public boolean isIrregularPulseDetected() {
@@ -36,12 +36,12 @@ public class MeasurementStatusDto {
     this.irregularPulseDetected = irregularPulseDetected;
   }
 
-  public String getPulseRateDetection() {
-    return pulseRateDetection;
+  public String getPulseRateRangeDetectionFlag() {
+    return pulseRateRangeDetectionFlag;
   }
 
-  public void setPulseRateDetection(String pulseRateDetection) {
-    this.pulseRateDetection = pulseRateDetection;
+  public void setPulseRateRangeDetectionFlag(String pulseRateRangeDetectionFlag) {
+    this.pulseRateRangeDetectionFlag = pulseRateRangeDetectionFlag;
   }
 
   public boolean isHasImproperMeasurementPosition() {
@@ -51,5 +51,5 @@ public class MeasurementStatusDto {
   public void setHasImproperMeasurementPosition(boolean hasImproperMeasurementPosition) {
     this.hasImproperMeasurementPosition = hasImproperMeasurementPosition;
   }
-  
+
 }

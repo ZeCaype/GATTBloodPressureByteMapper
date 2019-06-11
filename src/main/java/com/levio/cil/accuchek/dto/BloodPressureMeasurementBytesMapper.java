@@ -13,7 +13,7 @@ public class BloodPressureMeasurementBytesMapper {
 
   public BloodPressureMeasurementDto mapArrayOfBytesToReadableData(byte[] dataDto) {
     BloodPressureMeasurementDto bloodPressureMeasurement = new BloodPressureMeasurementDto();
-
+    BloodPressureMeasurementStatusDto status = new BloodPressureMeasurementStatusDto();
     BloodPressureMeasurementFlagsDto flags = new BloodPressureMeasurementFlagsDto();
     int position = 0;
 
@@ -38,7 +38,71 @@ public class BloodPressureMeasurementBytesMapper {
       position = setUserIdFromRawData(dataDto, bloodPressureMeasurement, position);
     }
 
+    setMeasurementStatusFromRawData(dataDto, bloodPressureMeasurement, status, flags, position);
+
     return bloodPressureMeasurement;
+  }
+
+  private void setMeasurementStatusFromRawData(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement,
+      BloodPressureMeasurementStatusDto status, BloodPressureMeasurementFlagsDto flags,
+      int position) {
+    
+    if (flags.isMeasurementStatusFlagPresent()) {
+
+      String rawFlagsBits1 = ByteUtils.byteToBinaryString(dataDto, position);
+      String rawFlagsBits2 = ByteUtils.byteToBinaryString(dataDto, position + 1);
+      String rawFlagsBits = new StringBuilder(rawFlagsBits2).reverse().toString() + new StringBuilder(rawFlagsBits1).reverse().toString();
+      int bitCount = 0;
+      String pulseRateRangeDetectionFlags = "";
+
+      for (char bit : rawFlagsBits.toCharArray()) {
+        switch (bitCount) {
+          case 0:
+            status.setHasBodyMovement(ByteUtils.binaryCharToBoolean(bit));
+            break;
+          case 1:
+            status.setCuffToLoose(ByteUtils.binaryCharToBoolean(bit));
+            break;
+          case 2:
+            status.setIrregularPulseDetected(ByteUtils.binaryCharToBoolean(bit));
+            break;
+          case 3:
+            pulseRateRangeDetectionFlags = pulseRateRangeDetectionFlags + bit;
+            break;
+          case 4:
+            pulseRateRangeDetectionFlags = pulseRateRangeDetectionFlags + bit;
+            pulseRateRangeDetectionFlags = new StringBuilder(pulseRateRangeDetectionFlags).reverse().toString();
+            int pulseRate = Integer.parseInt(pulseRateRangeDetectionFlags, 2);
+            setPulseRateValue(status, pulseRate);
+            break;
+          case 5:
+            status.setHasImproperMeasurementPosition(ByteUtils.binaryCharToBoolean(bit));
+            break;
+          default:
+            break;
+        }
+        bitCount++;
+      }
+      position = position + 2;
+      bloodPressureMeasurement.setMeasurementStatus(status);
+    }
+  }
+
+  private void setPulseRateValue(BloodPressureMeasurementStatusDto status, int pulseRate) {
+    switch (pulseRate) {
+      case 0:
+        status.setPulseRateRangeDetectionFlag("Pulse rate is within the range.");
+        break;
+      case 1:
+        status.setPulseRateRangeDetectionFlag("Pulse rate exceeds upper limit.");
+        break;
+      case 2:
+        status.setPulseRateRangeDetectionFlag("Pulse rate is less than lower limit.");
+        break;
+      default:
+        break;
+    }
   }
 
   private int setUserIdFromRawData(byte[] dataDto,

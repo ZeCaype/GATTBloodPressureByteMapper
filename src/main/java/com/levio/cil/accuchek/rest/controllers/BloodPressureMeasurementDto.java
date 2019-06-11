@@ -1,6 +1,7 @@
 package com.levio.cil.accuchek.rest.controllers;
 
 import com.levio.cil.accuchek.dto.BloodPressureMeasurementFlagsDto;
+import com.levio.cil.accuchek.dto.BloodPressureMeasurementStatusDto;
 
 public class BloodPressureMeasurementDto {
 
@@ -19,7 +20,7 @@ public class BloodPressureMeasurementDto {
   private int second;
   private float pulseRate;
   private int userId;
-  private MeasurementStatusDto measurementStatus;
+  private BloodPressureMeasurementStatusDto measurementStatus;
 
   public BloodPressureMeasurementDto() {
 
@@ -145,11 +146,11 @@ public class BloodPressureMeasurementDto {
     this.userId = userId;
   }
 
-  public MeasurementStatusDto getMeasurementStatus() {
+  public BloodPressureMeasurementStatusDto getMeasurementStatus() {
     return measurementStatus;
   }
 
-  public void setMeasurementStatus(MeasurementStatusDto measurementStatus) {
+  public void setMeasurementStatus(BloodPressureMeasurementStatusDto measurementStatus) {
     this.measurementStatus = measurementStatus;
   }
 
