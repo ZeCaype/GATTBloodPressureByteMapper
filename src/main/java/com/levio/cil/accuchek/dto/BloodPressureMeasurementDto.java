@@ -1,7 +1,4 @@
-package com.levio.cil.accuchek.rest.controllers;
-
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementFlagsDto;
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementStatusDto;
+package com.levio.cil.accuchek.dto;
 
 public class BloodPressureMeasurementDto {
 

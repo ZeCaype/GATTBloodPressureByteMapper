@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.levio.cil.accuchek.dto.BloodPressureFeatureDto;
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementBytesMapper;
+import com.levio.cil.accuchek.dto.BloodPressureMeasurementDto;
 import com.levio.cil.accuchek.mappers.BloodPressureFeatureBytesMapper;
+import com.levio.cil.accuchek.mappers.BloodPressureMeasurementBytesMapper;
 
 @RestController
 @RequestMapping(value = "/bloodpressure")
