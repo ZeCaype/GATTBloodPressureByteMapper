@@ -2,17 +2,10 @@ package com.levio.cil.accuchek.mappers;
 
 import com.levio.cil.accuchek.dto.BloodPressureFeatureDto;
 import com.levio.cil.accuchek.rest.utils.ByteUtils;
-import org.springframework.stereotype.Component;
 
-@Component
-public class BloodPressureFeatureBytesMapper {
+class BloodPressureFeatureBytesMapper {
 
-
-  public BloodPressureFeatureBytesMapper() {
-
-  }
-
-  public BloodPressureFeatureDto mapArrayOfBytesToReadableData(byte[] dataDto) {
+  static BloodPressureFeatureDto mapArrayOfBytesToReadableData(byte[] dataDto) {
 
     BloodPressureFeatureDto bloodFeature = new BloodPressureFeatureDto();
 

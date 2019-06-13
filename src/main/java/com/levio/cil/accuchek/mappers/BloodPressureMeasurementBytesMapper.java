@@ -1,19 +1,13 @@
 package com.levio.cil.accuchek.mappers;
 
-import org.springframework.stereotype.Component;
 import com.levio.cil.accuchek.dto.BloodPressureMeasurementDto;
 import com.levio.cil.accuchek.dto.BloodPressureMeasurementFlagsDto;
 import com.levio.cil.accuchek.dto.BloodPressureMeasurementStatusDto;
 import com.levio.cil.accuchek.rest.utils.ByteUtils;
 
-@Component
-public class BloodPressureMeasurementBytesMapper {
+ class BloodPressureMeasurementBytesMapper {
 
-  public BloodPressureMeasurementBytesMapper() {
-
-  }
-
-  public BloodPressureMeasurementDto mapArrayOfBytesToReadableData(byte[] dataDto) {
+  static BloodPressureMeasurementDto mapArrayOfBytesToReadableData(byte[] dataDto) {
     BloodPressureMeasurementDto bloodPressureMeasurement = new BloodPressureMeasurementDto();
     BloodPressureMeasurementStatusDto status = new BloodPressureMeasurementStatusDto();
     BloodPressureMeasurementFlagsDto flags = new BloodPressureMeasurementFlagsDto();
@@ -45,7 +39,7 @@ public class BloodPressureMeasurementBytesMapper {
     return bloodPressureMeasurement;
   }
 
-  private void setMeasurementStatusFromRawData(byte[] dataDto,
+  private static void setMeasurementStatusFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement,
       BloodPressureMeasurementStatusDto status, BloodPressureMeasurementFlagsDto flags,
       int position) {
@@ -91,7 +85,7 @@ public class BloodPressureMeasurementBytesMapper {
     }
   }
 
-  private void setPulseRateValue(BloodPressureMeasurementStatusDto status, int pulseRate) {
+  private static void setPulseRateValue(BloodPressureMeasurementStatusDto status, int pulseRate) {
     switch (pulseRate) {
       case 0:
         status.setPulseRateRangeDetectionFlag("Pulse rate is within the range.");
@@ -107,7 +101,7 @@ public class BloodPressureMeasurementBytesMapper {
     }
   }
 
-  private int setUserIdFromRawData(byte[] dataDto,
+  private static int setUserIdFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int userId = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -117,7 +111,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setPulseRate(byte[] dataDto, BloodPressureMeasurementDto bloodPressureMeasurement,
+  private static int setPulseRate(byte[] dataDto, BloodPressureMeasurementDto bloodPressureMeasurement,
       int position) {
     bloodPressureMeasurement
         .setPulseRate(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
@@ -125,7 +119,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setSecondsFromRawData(byte[] dataDto,
+  private static int setSecondsFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int seconds = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -135,7 +129,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setMinutesFromRawData(byte[] dataDto,
+  private static int setMinutesFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int minutes = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -145,7 +139,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setHoursFromRawData(byte[] dataDto,
+  private static int setHoursFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int hours = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -155,7 +149,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setDayFromRawData(byte[] dataDto,
+  private static int setDayFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int day = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -165,7 +159,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setMonthFromRawData(byte[] dataDto,
+  private static int setMonthFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(dataDto, position);
     int month = Integer.parseInt(rawSequenceNumberBits, 2);
@@ -175,7 +169,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setYearFromRawData(byte[] bytes, BloodPressureMeasurementDto bloodPressure,
+  private static int setYearFromRawData(byte[] bytes, BloodPressureMeasurementDto bloodPressure,
       int position) {
     String rawSequenceNumberBits = ByteUtils.byteToBinaryString(bytes, position + 1)
         + ByteUtils.byteToBinaryString(bytes, position);
@@ -186,7 +180,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private int setCompundValuesFromRawData(byte[] dataDto,
+  private static int setCompundValuesFromRawData(byte[] dataDto,
       BloodPressureMeasurementDto bloodPressureMeasurement, BloodPressureMeasurementFlagsDto flags,
       int position) {
     if (flags.isBloodPressureUnitInKpa()) {
@@ -210,7 +204,7 @@ public class BloodPressureMeasurementBytesMapper {
     return position;
   }
 
-  private void setFlagsFromRawData(byte[] dataDto, BloodPressureMeasurementFlagsDto flags,
+  private static void setFlagsFromRawData(byte[] dataDto, BloodPressureMeasurementFlagsDto flags,
       int position) {
     String rawBits = ByteUtils.byteToBinaryString(dataDto, position);
     rawBits = new StringBuilder(rawBits).reverse().toString();
