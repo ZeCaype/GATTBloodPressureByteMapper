@@ -1,9 +1,9 @@
-package com.levio.cil.accuchek.mappers;
+package com.levio.lab.bt.mappers;
 
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementDto;
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementFlagsDto;
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementStatusDto;
-import com.levio.cil.accuchek.rest.utils.ByteUtils;
+import com.levio.lab.bt.services.bloodpressure.measurement.BloodPressureMeasurementDto;
+import com.levio.lab.bt.services.bloodpressure.measurement.BloodPressureMeasurementFlagsDto;
+import com.levio.lab.bt.services.bloodpressure.measurement.BloodPressureMeasurementStatusDto;
+import com.levio.lab.bt.utils.ByteUtils;
 
 class BloodPressureMeasurementBytesMapper {
 

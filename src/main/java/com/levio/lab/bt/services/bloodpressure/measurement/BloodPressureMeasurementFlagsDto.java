@@ -1,4 +1,4 @@
-package com.levio.cil.accuchek.dto;
+package com.levio.lab.bt.services.bloodpressure.measurement;
 
 public class BloodPressureMeasurementFlagsDto {
 
@@ -7,9 +7,9 @@ public class BloodPressureMeasurementFlagsDto {
   private boolean isPulseRateFlagPresent;
   private boolean isUserIdFlagPresent;
   private boolean isMeasurementStatusFlagPresent;
-  
+
   public BloodPressureMeasurementFlagsDto() {
-    
+
   }
 
   public boolean isBloodPressureUnitInKpa() {
@@ -51,5 +51,5 @@ public class BloodPressureMeasurementFlagsDto {
   public void setMeasurementStatusFlagPresent(boolean isMeasurementStatusFlagPresent) {
     this.isMeasurementStatusFlagPresent = isMeasurementStatusFlagPresent;
   }
-  
+
 }

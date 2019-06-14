@@ -1,12 +1,14 @@
+package com.levio.lab.bt.mappers;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import com.levio.cil.accuchek.dto.BloodPressureFeatureDto;
-import com.levio.cil.accuchek.dto.BloodPressureMeasurementDto;
-import com.levio.cil.accuchek.mappers.BloodPressureBytesMapper;
+import com.levio.lab.bt.mappers.BloodPressureBytesMapper;
+import com.levio.lab.bt.services.bloodpressure.feature.BloodPressureFeatureDto;
+import com.levio.lab.bt.services.bloodpressure.measurement.BloodPressureMeasurementDto;
 
 public class BloodPressureBytesMapperTest {
 
@@ -116,7 +118,8 @@ public class BloodPressureBytesMapperTest {
 
     assertTrue(result.getMeasurementStatus().isHasBodyMovement());
     assertFalse(result.getMeasurementStatus().isCuffToLoose());
-    assertTrue(result.getMeasurementStatus().getPulseRateRangeDetectionFlag().equals("Pulse rate is within the range."));
+    assertTrue(result.getMeasurementStatus().getPulseRateRangeDetectionFlag()
+        .equals("Pulse rate is within the range."));
     assertFalse(result.getMeasurementStatus().isIrregularPulseDetected());
     assertFalse(result.getMeasurementStatus().isHasImproperMeasurementPosition());
   }

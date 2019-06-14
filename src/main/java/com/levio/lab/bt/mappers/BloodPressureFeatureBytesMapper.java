@@ -1,7 +1,7 @@
-package com.levio.cil.accuchek.mappers;
+package com.levio.lab.bt.mappers;
 
-import com.levio.cil.accuchek.dto.BloodPressureFeatureDto;
-import com.levio.cil.accuchek.rest.utils.ByteUtils;
+import com.levio.lab.bt.services.bloodpressure.feature.BloodPressureFeatureDto;
+import com.levio.lab.bt.utils.ByteUtils;
 
 class BloodPressureFeatureBytesMapper {
 
@@ -11,8 +11,10 @@ class BloodPressureFeatureBytesMapper {
 
     String rawBloodPressureFeatureByte1 = ByteUtils.byteToBinaryString(dataDto, 0);
     String rawBloodPressureFeatureByte2 = ByteUtils.byteToBinaryString(dataDto, 1);
-    rawBloodPressureFeatureByte1 = new StringBuilder(rawBloodPressureFeatureByte1).reverse().toString();
-    rawBloodPressureFeatureByte2 = new StringBuilder(rawBloodPressureFeatureByte2).reverse().toString();
+    rawBloodPressureFeatureByte1 =
+        new StringBuilder(rawBloodPressureFeatureByte1).reverse().toString();
+    rawBloodPressureFeatureByte2 =
+        new StringBuilder(rawBloodPressureFeatureByte2).reverse().toString();
     int bitCount = 0;
 
     for (char bit : rawBloodPressureFeatureByte1.toCharArray()) {

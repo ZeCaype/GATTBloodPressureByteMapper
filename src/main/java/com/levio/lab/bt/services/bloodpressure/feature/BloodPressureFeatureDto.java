@@ -1,4 +1,4 @@
-package com.levio.cil.accuchek.dto;
+package com.levio.lab.bt.services.bloodpressure.feature;
 
 public class BloodPressureFeatureDto {
 
