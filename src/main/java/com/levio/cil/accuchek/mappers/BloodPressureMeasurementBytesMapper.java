@@ -5,7 +5,7 @@ import com.levio.cil.accuchek.dto.BloodPressureMeasurementFlagsDto;
 import com.levio.cil.accuchek.dto.BloodPressureMeasurementStatusDto;
 import com.levio.cil.accuchek.rest.utils.ByteUtils;
 
- class BloodPressureMeasurementBytesMapper {
+class BloodPressureMeasurementBytesMapper {
 
   static BloodPressureMeasurementDto mapArrayOfBytesToReadableData(byte[] dataDto) {
     BloodPressureMeasurementDto bloodPressureMeasurement = new BloodPressureMeasurementDto();
@@ -43,12 +43,13 @@ import com.levio.cil.accuchek.rest.utils.ByteUtils;
       BloodPressureMeasurementDto bloodPressureMeasurement,
       BloodPressureMeasurementStatusDto status, BloodPressureMeasurementFlagsDto flags,
       int position) {
-    
+
     if (flags.isMeasurementStatusFlagPresent()) {
 
       String rawFlagsBits1 = ByteUtils.byteToBinaryString(dataDto, position);
       String rawFlagsBits2 = ByteUtils.byteToBinaryString(dataDto, position + 1);
-      String rawFlagsBits = new StringBuilder(rawFlagsBits2).reverse().toString() + new StringBuilder(rawFlagsBits1).reverse().toString();
+      String rawFlagsBits = new StringBuilder(rawFlagsBits2).reverse().toString()
+          + new StringBuilder(rawFlagsBits1).reverse().toString();
       int bitCount = 0;
       String pulseRateRangeDetectionFlags = "";
 
@@ -68,7 +69,8 @@ import com.levio.cil.accuchek.rest.utils.ByteUtils;
             break;
           case 4:
             pulseRateRangeDetectionFlags = pulseRateRangeDetectionFlags + bit;
-            pulseRateRangeDetectionFlags = new StringBuilder(pulseRateRangeDetectionFlags).reverse().toString();
+            pulseRateRangeDetectionFlags =
+                new StringBuilder(pulseRateRangeDetectionFlags).reverse().toString();
             int pulseRate = Integer.parseInt(pulseRateRangeDetectionFlags, 2);
             setPulseRateValue(status, pulseRate);
             break;
@@ -111,8 +113,8 @@ import com.levio.cil.accuchek.rest.utils.ByteUtils;
     return position;
   }
 
-  private static int setPulseRate(byte[] dataDto, BloodPressureMeasurementDto bloodPressureMeasurement,
-      int position) {
+  private static int setPulseRate(byte[] dataDto,
+      BloodPressureMeasurementDto bloodPressureMeasurement, int position) {
     bloodPressureMeasurement
         .setPulseRate(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
     position = position + 2;
@@ -184,20 +186,21 @@ import com.levio.cil.accuchek.rest.utils.ByteUtils;
       BloodPressureMeasurementDto bloodPressureMeasurement, BloodPressureMeasurementFlagsDto flags,
       int position) {
     if (flags.isBloodPressureUnitInKpa()) {
-      bloodPressureMeasurement
-          .setMmHgSystolicValue(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
-      bloodPressureMeasurement.setMmHgDiastolicValue(
-          ByteUtils.SFLOAT16Parser(dataDto[position + 2], dataDto[position + 3]));
-      bloodPressureMeasurement.setMmHgMeanArterialPressureValue(
-          ByteUtils.SFLOAT16Parser(dataDto[position + 4], dataDto[position + 5]));
-      position = position + 6;
 
-    } else {
       bloodPressureMeasurement
           .setkPaSystolicValue(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
       bloodPressureMeasurement.setkPaDiastolicValue(
           ByteUtils.SFLOAT16Parser(dataDto[position + 2], dataDto[position + 3]));
       bloodPressureMeasurement.setkPaMeanArterialPressureValue(
+          ByteUtils.SFLOAT16Parser(dataDto[position + 4], dataDto[position + 5]));
+      position = position + 6;
+
+    } else {
+      bloodPressureMeasurement
+          .setMmHgSystolicValue(ByteUtils.SFLOAT16Parser(dataDto[position], dataDto[position + 1]));
+      bloodPressureMeasurement.setMmHgDiastolicValue(
+          ByteUtils.SFLOAT16Parser(dataDto[position + 2], dataDto[position + 3]));
+      bloodPressureMeasurement.setMmHgMeanArterialPressureValue(
           ByteUtils.SFLOAT16Parser(dataDto[position + 4], dataDto[position + 5]));
       position = position + 6;
     }
