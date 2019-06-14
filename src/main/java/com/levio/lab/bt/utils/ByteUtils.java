@@ -1,10 +1,9 @@
-package com.levio.cil.accuchek.rest.utils;
+package com.levio.lab.bt.utils;
 
 public class ByteUtils {
 
   public static String byteToBinaryString(byte[] bytes, int i) {
-    String bitArray =
-        String.format("%8s", Integer.toBinaryString(bytes[i])).replace(' ', '0');
+    String bitArray = String.format("%8s", Integer.toBinaryString(bytes[i])).replace(' ', '0');
 
     if (bitArray.length() != 8) {
       bitArray = bitArray.substring(24);
@@ -12,10 +11,9 @@ public class ByteUtils {
 
     return bitArray;
   }
-  
+
   public static String intToBinaryString(int[] bytes, int i) {
-    String bitArray =
-        String.format("%8s", Integer.toBinaryString(bytes[i])).replace(' ', '0');
+    String bitArray = String.format("%8s", Integer.toBinaryString(bytes[i])).replace(' ', '0');
 
     if (bitArray.length() != 8) {
       bitArray = bitArray.substring(24);
@@ -23,15 +21,14 @@ public class ByteUtils {
 
     return bitArray;
   }
-  
+
   public static int binaryStringToInt(String binaryString) {
-    
+
     return Integer.parseInt(binaryString, 2);
   }
 
   public static String byteToBinaryString(byte b) {
-    String bitArray =
-        String.format("%8s", Integer.toBinaryString(b)).replace(' ', '0');
+    String bitArray = String.format("%8s", Integer.toBinaryString(b)).replace(' ', '0');
 
     if (bitArray.length() != 8) {
       bitArray = bitArray.substring(24);
